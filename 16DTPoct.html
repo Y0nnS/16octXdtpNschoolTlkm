@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Docx Anfin OBJECT 16</title>
+
+ </body>
+ <script>
+  let library = [];
+  function addBook(Judul, Pembuat, Tahun, Genre) {
+   const book = {
+    Judul,
+    Pembuat,
+    Tahun,
+    Genre
+   };
+   book.edit = (JudulBaru, PembuatBaru, TahunBaru, GenreBaru) => {
+    Object.assign(book, { Judul: JudulBaru, Pembuat: PembuatBaru, Tahun: TahunBaru, Genre: GenreBaru });
+    document.write(`<br>[ + ] Buku "${book.Judul}" berhasil diperbarui`);
+   };
+   book.delete = () => {
+    document.write(`<br>[ - ] Buku "${book.Judul}" berhasil dihapus<br>`);
+    library = library.filter(b => b !== book);
+   };
+   library.push(book);
+   document.write(`[ + ] Buku "${book.Judul}" berhasil ditambahkan<br>`);
+  }
+
+
+  function displayBooks() {
+   if (library.length === 0) {
+    document.write("Tidak ada buku di perpustakaan<br>");
+    return;
+   }
+   document.write("<br><b>Daftar Buku Perpustakaan :</b><br>");
+   library.forEach((book, index) => {
+    document.write(`${index + 1}. ${book.Judul} oleh ${book.Pembuat}, ${book.Tahun} - Genre : ${book.Genre}<br>`);
+   });
+  }
+
+  // Daftar Buku ( Menambahkan Buku ) (Library)
+  addBook("Malam Sabtu Kliwon", "Anfin", 1995, "Horror");
+  addBook("Menanti Waktu Tidur", "Santoso", 2004, "Fiction");
+  addBook("Titanic Part 2", "Aruna", 2020, "Magic");
+
+  // Mendisplay semua buku
+  displayBooks();
+
+  // Edit Buku menggunakan this
+  library[0].edit("Malam Sabtu Anfin The Journey", "Anfin", 1995, "Horror");
+
+  // Delete Buku menggunakan this
+  library[2].delete();
+
+  // Mendisplay semua buku setelah perubahan
+  displayBooks();
+
+ </script>
+
+</html>
